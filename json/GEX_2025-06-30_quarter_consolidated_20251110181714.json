@@ -1,0 +1,2006 @@
+{
+  "_generated_at": "2025-11-10T18:17:14",
+  "company": {
+    "company_id": 5,
+    "ticker": "GEX",
+    "company_name": "GEX"
+  },
+  "report": {
+    "report_id": 5,
+    "period_start": "2025-04-01",
+    "period_end": "2025-06-30",
+    "report_type": "quarter",
+    "consolidation": "consolidated",
+    "gaap": "VAS",
+    "auditor": null,
+    "source_file": "C:\\Nguyen Nhat Vu\\test4\\data\\raw\\GEX_Baocaotaichinh_Q2_2025_Hopnhat_28072025092612.pdf"
+  },
+  "facts": [
+    {
+      "std_code": "BS_BONDS_PAYABLE",
+      "std_label": "Bonds payable",
+      "context": "col1",
+      "amount": 726916258732.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "triển dau phat Quy tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_BONDS_PAYABLE",
+      "std_label": "Bonds payable",
+      "context": "col2",
+      "amount": 655599859290.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "triển dau phat Quy tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CASH",
+      "std_label": "Cash and cash equivalents",
+      "context": "asof_2024",
+      "amount": 4315827075586.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "tiền cuối Tiền ky va đương twong",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CASH",
+      "std_label": "Cash and cash equivalents",
+      "context": "asof_2025",
+      "amount": 3817208124874.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "tiền cuối Tiền ky va đương twong",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CASH",
+      "std_label": "Cash and cash equivalents",
+      "context": "asof_2025_2",
+      "amount": 2040652763582.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "tiền đương khoản Các tương",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CASH",
+      "std_label": "Cash and cash equivalents",
+      "context": "col1",
+      "amount": 124188572086.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "tiền dai han trước Người tra mua",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CASH",
+      "std_label": "Cash and cash equivalents",
+      "context": "col2",
+      "amount": 214545803726.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "tiền dai han trước Người tra mua",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CONSTRUCTION_IN_PROGRESS_LT",
+      "std_label": "Construction in progress (long term)",
+      "context": "asof_2025",
+      "amount": 8120896835449.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "ban do dang Chỉ phí xây dung co",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CONSTRUCTION_IN_PROGRESS_LT",
+      "std_label": "Construction in progress (long term)",
+      "context": "asof_2025_2",
+      "amount": 7928773368011.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "ban do dang Chỉ phí xây dung co",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CURRENT_ASSETS",
+      "std_label": "Current assets",
+      "context": "asof_2025",
+      "amount": 26574958454784.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "NGẮN SẢN TÀI HAN A.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CURRENT_ASSETS",
+      "std_label": "Current assets",
+      "context": "asof_2025_2",
+      "amount": 22828907651783.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "NGẮN SẢN TÀI HAN A.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CURRENT_LIAB",
+      "std_label": "Current liabilities",
+      "context": "col1",
+      "amount": 117828381522.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngan han thực hiện thu chưa Doanh",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_CURRENT_LIAB",
+      "std_label": "Current liabilities",
+      "context": "col2",
+      "amount": 56718828412.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngan han thực hiện thu chưa Doanh",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_EQUITY",
+      "std_label": "Owner's equity",
+      "context": "col1",
+      "amount": 25248127906927.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn sé hữu chủ I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_EQUITY",
+      "std_label": "Owner's equity",
+      "context": "col2",
+      "amount": 23218978324106.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn sé hữu chủ I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_FVTPL",
+      "std_label": "Financial assets at FVTPL",
+      "context": "col1",
+      "amount": 9023989480000.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "quyét quyền biểu Cé phiéu phé thông có 41la",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_FVTPL",
+      "std_label": "Financial assets at FVTPL",
+      "context": "col2",
+      "amount": 8594297930000.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "quyét quyền biểu Cé phiéu phé thông có 41la",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_GOODWILL",
+      "std_label": "Goodwill",
+      "context": "asof_2025",
+      "amount": 1012255339290.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "thé Loi thương mai",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_GOODWILL",
+      "std_label": "Goodwill",
+      "context": "asof_2025_2",
+      "amount": 1057973135564.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "thé Loi thương mai",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_HELD_TO_MATURITY_ST",
+      "std_label": "Held-to-maturity investments (short-term)",
+      "context": "asof_2024",
+      "amount": 1802645914.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "đồi đồi hồi Anh ngoại gid đoái tệ hưởng của thay ty quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_HELD_TO_MATURITY_ST",
+      "std_label": "Held-to-maturity investments (short-term)",
+      "context": "asof_2025",
+      "amount": 1701486339.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "đồi đồi hồi Anh ngoại gid đoái tệ hưởng của thay ty quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_HELD_TO_MATURITY_ST",
+      "std_label": "Held-to-maturity investments (short-term)",
+      "context": "asof_2025_2",
+      "amount": 1752300000.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "nắm đến Dau dao han giữ ngay tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVENTORIES",
+      "std_label": "Inventories",
+      "context": "asof_2025",
+      "amount": 10379934365167.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "tồn | kho Hang 14I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVENTORIES",
+      "std_label": "Inventories",
+      "context": "asof_2025_2",
+      "amount": 8879344974669.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "tồn | kho Hang 14I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVESTMENT_PROPERTY",
+      "std_label": "Investment property",
+      "context": "asof_2025",
+      "amount": 2741904027223.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "Bat dau động sản III. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVESTMENT_PROPERTY",
+      "std_label": "Investment property",
+      "context": "asof_2025_2",
+      "amount": 2516202371393.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "Bat dau động sản III. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVESTMENTS_IN_ASSOC",
+      "std_label": "Investments in associates and joint ventures",
+      "context": "asof_2025",
+      "amount": 2905688166152.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "kết Pau liên liên doanh, vào công ty tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVESTMENTS_IN_ASSOC",
+      "std_label": "Investments in associates and joint ventures",
+      "context": "asof_2025_2",
+      "amount": 2855791356282.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "kết Pau liên liên doanh, vào công ty tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_INVESTMENTS_IN_ASSOC",
+      "std_label": "Investments in associates and joint ventures",
+      "context": "q2_2025",
+      "amount": 3547457057.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "kết Phần lỗ doanh, liên liên lãi hoặc công ty trong",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LIABILITIES",
+      "std_label": "Liabilities",
+      "context": "col1",
+      "amount": 33975052097680.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "PHẢI TRẢ NỢ C.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LIABILITIES",
+      "std_label": "Liabilities",
+      "context": "col2",
+      "amount": 30524357681876.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "PHẢI TRẢ NỢ C.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LONG_TERM_INVESTMENTS",
+      "std_label": "Long-term financial investments",
+      "context": "asof_2025",
+      "amount": 3041079641774.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "Dau tai chinh dai han V. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LONG_TERM_INVESTMENTS",
+      "std_label": "Long-term financial investments",
+      "context": "asof_2025_2",
+      "amount": 2989757831904.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "Dau tai chinh dai han V. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LONG_TERM_INVESTMENTS",
+      "std_label": "Long-term financial investments",
+      "context": "col1",
+      "amount": 24243772526.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "héi đoái lệch gid Chênh ty",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LONG_TERM_INVESTMENTS",
+      "std_label": "Long-term financial investments",
+      "context": "col2",
+      "amount": 14587980358.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "héi đoái lệch gid Chênh ty",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LONG_TERM_RECEIVABLES",
+      "std_label": "Long-term receivables",
+      "context": "asof_2024",
+      "amount": 31109866200.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "khoan phai thu giam các Tang,",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LT_LOANS_RECEIVABLE",
+      "std_label": "Loans receivable - long term",
+      "context": "asof_2025",
+      "amount": 112950000000.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn vé han cho Phai thu vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_LT_LOANS_RECEIVABLE",
+      "std_label": "Loans receivable - long term",
+      "context": "asof_2025_2",
+      "amount": 115075000000.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn vé han cho Phai thu vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "asof_2024",
+      "amount": 398023996552.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "kiểm Lợinhuậnsauthuế Cé soát không đông của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "asof_2025",
+      "amount": 742446215312.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "kiểm Lợinhuậnsauthuế Cé soát không đông của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "col1",
+      "amount": 10637721593347.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "kiém cổ soát đông không",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "col2",
+      "amount": 9261946842294.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "kiém cổ soát đông không",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "q2_2024",
+      "amount": 253109407913.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "kiểm Lợinhuậnsauthuế Cé soát không đông của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCONTROLLING_INTEREST",
+      "std_label": "Non-controlling interests",
+      "context": "q2_2025",
+      "amount": 539722314588.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "kiểm Lợinhuậnsauthuế Cé soát không đông của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCURRENT_LIAB",
+      "std_label": "Non-current liabilities",
+      "context": "asof_2025",
+      "amount": 47722887150.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "thé Thiét phy thay dai han bi, vat ting tu,",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCURRENT_LIAB",
+      "std_label": "Non-current liabilities",
+      "context": "asof_2025_2",
+      "amount": 4834503690.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "thé Thiét phy thay dai han bi, vat ting tu,",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCURRENT_LIAB",
+      "std_label": "Non-current liabilities",
+      "context": "col1",
+      "amount": 567280275786.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "dai han phòng phải tra Dy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_NONCURRENT_LIAB",
+      "std_label": "Non-current liabilities",
+      "context": "col2",
+      "amount": 515637096063.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "dai han phòng phải tra Dy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ORIGINAL_COST_IP",
+      "std_label": "Investment property - historical cost",
+      "context": "asof_2025",
+      "amount": 14883029761084.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "gid Nguyén",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ORIGINAL_COST_IP",
+      "std_label": "Investment property - historical cost",
+      "context": "asof_2025_2",
+      "amount": 13989083012792.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "gid Nguyén",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_AR_LT",
+      "std_label": "Other long-term receivables",
+      "context": "col1",
+      "amount": 100298992548.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "dài hạn khác Phải trả",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_AR_LT",
+      "std_label": "Other long-term receivables",
+      "context": "col2",
+      "amount": 84046142084.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "dài hạn khác Phải trả",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_AR_ST",
+      "std_label": "Other short-term receivables",
+      "context": "col1",
+      "amount": 38025668845.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Nguồn phi va khác kinh quỹ II.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_AR_ST",
+      "std_label": "Other short-term receivables",
+      "context": "col2",
+      "amount": 38982212840.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Nguồn phi va khác kinh quỹ II.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_CURRENT_ASSETS",
+      "std_label": "Other current assets",
+      "context": "asof_2025",
+      "amount": 145046261431.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "| ngắn han phi trước Chi tra",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_CURRENT_ASSETS",
+      "std_label": "Other current assets",
+      "context": "asof_2025_2",
+      "amount": 69011887537.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "| ngắn han phi trước Chi tra",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_NONCURRENT_ASSETS",
+      "std_label": "Other non-current assets",
+      "context": "asof_2025",
+      "amount": 2426963963652.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "san dai khác Tai han VI.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_NONCURRENT_ASSETS",
+      "std_label": "Other non-current assets",
+      "context": "asof_2025_2",
+      "amount": 2237664818976.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "san dai khác Tai han VI.",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_OWNER_FUNDS",
+      "std_label": "Other owners' funds",
+      "context": "col1",
+      "amount": 77388963577.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn hữu khác chu sé của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_OTHER_OWNER_FUNDS",
+      "std_label": "Other owners' funds",
+      "context": "col2",
+      "amount": 77388963577.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn hữu khác chu sé của",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PAID_IN_CAPITAL",
+      "std_label": "Share capital",
+      "context": "col1",
+      "amount": 9023989480000.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn cht hữu gdp cia sé",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PAID_IN_CAPITAL",
+      "std_label": "Share capital",
+      "context": "col2",
+      "amount": 8594297930000.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Vốn cht hữu gdp cia sé",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PAYROLL_PAYABLE",
+      "std_label": "Payables to employees",
+      "context": "col1",
+      "amount": 361765656471.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "người lao động Phải trả",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PAYROLL_PAYABLE",
+      "std_label": "Payables to employees",
+      "context": "col2",
+      "amount": 487323108150.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "người lao động Phải trả",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PPE",
+      "std_label": "Property, plant and equipment",
+      "context": "asof_2025",
+      "amount": 665110220582.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "cố dinh hình Tài sản v6",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PPE",
+      "std_label": "Property, plant and equipment",
+      "context": "asof_2025_2",
+      "amount": 606682677156.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "cố dinh hình Tài sản v6",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PREPAY_SUPPLIER_ST",
+      "std_label": "Short-term advances to suppliers",
+      "context": "asof_2025",
+      "amount": 1386594524446.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn han người ban cho Tra trước",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_PREPAY_SUPPLIER_ST",
+      "std_label": "Short-term advances to suppliers",
+      "context": "asof_2025_2",
+      "amount": 1211916380704.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn han người ban cho Tra trước",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_RETAINED_EARNINGS",
+      "std_label": "Retained earnings",
+      "context": "col1",
+      "amount": 899103176605.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "phối phân chưa năm 421b LNST nay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_RETAINED_EARNINGS",
+      "std_label": "Retained earnings",
+      "context": "col2",
+      "amount": 3952152891868.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "phối thué chưa phan Lợi nhuận sau",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_REVENUE_RECEIVED_AHEAD_LT",
+      "std_label": "Long-term unearned revenue",
+      "context": "col1",
+      "amount": 3236033504276.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "han thực hién dai thu chưa Doanh",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_REVENUE_RECEIVED_AHEAD_LT",
+      "std_label": "Long-term unearned revenue",
+      "context": "col2",
+      "amount": 3095003971505.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "han thực hién dai thu chưa Doanh",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_SHARE_PREMIUM",
+      "std_label": "Share premium",
+      "context": "col1",
+      "amount": 662912856719.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "vốn cổ phan Thang du",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_SHARE_PREMIUM",
+      "std_label": "Share premium",
+      "context": "col2",
+      "amount": 663003856719.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "vốn cổ phan Thang du",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_BORROWINGS",
+      "std_label": "Short-term borrowings",
+      "context": "col1",
+      "amount": 9313661588282.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han tai chính thué và Vay nợ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_BORROWINGS",
+      "std_label": "Short-term borrowings",
+      "context": "col2",
+      "amount": 8239063820719.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han tai chính thué và Vay nợ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_EXPENSES_PAYABLE",
+      "std_label": "Short-term accrued expenses",
+      "context": "col1",
+      "amount": 125119823055.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han phong phải tra Du",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_EXPENSES_PAYABLE",
+      "std_label": "Short-term accrued expenses",
+      "context": "col2",
+      "amount": 111981052448.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han phong phải tra Du",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_INVEST",
+      "std_label": "Short-term financial investments",
+      "context": "asof_2025",
+      "amount": 6988528392031.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn Dau chính han tai Il. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_INVEST",
+      "std_label": "Short-term financial investments",
+      "context": "asof_2025_2",
+      "amount": 5042691984219.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "ngắn Dau chính han tai Il. tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_RECEIVABLES",
+      "std_label": "Short-term receivables",
+      "context": "asof_2025",
+      "amount": 1050822486247.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "vé dai han Phải thu cho vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_RECEIVABLES",
+      "std_label": "Short-term receivables",
+      "context": "asof_2025_2",
+      "amount": 1105072486247.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "vé dai han Phải thu cho vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_TRADE_PAYABLES",
+      "std_label": "Short-term trade payables",
+      "context": "col1",
+      "amount": 3289580149217.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han người ban Phải tra",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_ST_TRADE_PAYABLES",
+      "std_label": "Short-term trade payables",
+      "context": "col2",
+      "amount": 3151508613.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "ngắn han người ban Phải tra",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TAX_PAYABLE_ST",
+      "std_label": "Taxes and statutory obligations",
+      "context": "col1",
+      "amount": 752608581170.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Thuế Nha phải nộp nước khoản va các",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TAX_PAYABLE_ST",
+      "std_label": "Taxes and statutory obligations",
+      "context": "col2",
+      "amount": 660744642058.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Thuế Nha phải nộp nước khoản va các",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TAX_RECLAIMABLE_ST",
+      "std_label": "Short-term tax assets",
+      "context": "asof_2025",
+      "amount": 801951146373.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "ké (không lai khoản phải tra giam cac Tang, vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TOTAL_ASSETS",
+      "std_label": "Total assets",
+      "context": "asof_2025",
+      "amount": 59261205673452.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "SAN TONG TAI CONG",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TOTAL_ASSETS",
+      "std_label": "Total assets",
+      "context": "asof_2025_2",
+      "amount": 53782318218822.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "SAN TONG TAI CONG",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TOTAL_LIAB_EQUITY",
+      "std_label": "Total liabilities and equity",
+      "context": "col2",
+      "amount": 53782318218822.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "VON NGUON TONG CONG",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADE_AR_ST",
+      "std_label": "Short-term trade receivables",
+      "context": "col1",
+      "amount": 38025668845.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Nguồn da hình thành TSCD kinh phi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADE_AR_ST",
+      "std_label": "Short-term trade receivables",
+      "context": "col2",
+      "amount": 38982212840.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Nguồn da hình thành TSCD kinh phi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADING_SECURITIES",
+      "std_label": "Trading securities",
+      "context": "asof_2024",
+      "amount": 176876461311.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "doanh chứng khoán kinh Tăng,giảm",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADING_SECURITIES",
+      "std_label": "Trading securities",
+      "context": "asof_2025",
+      "amount": 5012257655819.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "kinh doanh khoán Chứng",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADING_SECURITIES",
+      "std_label": "Trading securities",
+      "context": "asof_2025_2",
+      "amount": 4547632976936.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "kinh doanh khoán Chứng",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_TRADING_SECURITIES",
+      "std_label": "Trading securities",
+      "context": "col1",
+      "amount": 100100512.0,
+      "unit": "VND",
+      "page": 15,
+      "src_label": "số lan dau doanh ky kinh nhận dang chứng",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_VAT_DEDUCTIBLE",
+      "std_label": "VAT deductible",
+      "context": "asof_2025",
+      "amount": 1026986433406.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "khau Thué được trừ gia tri gia tang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "BS_VAT_DEDUCTIBLE",
+      "std_label": "VAT deductible",
+      "context": "asof_2025_2",
+      "amount": 873267399664.0,
+      "unit": "VND",
+      "page": 9,
+      "src_label": "khau Thué được trừ gia tri gia tang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_DEPRECIATION",
+      "std_label": "Depreciation and amortization",
+      "context": "asof_2024",
+      "amount": 1685422036900.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "thé dau cé bat Khấu lợi định, động san va hao tai san tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_DEPRECIATION",
+      "std_label": "Depreciation and amortization",
+      "context": "asof_2025",
+      "amount": 1428034159696.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "thé dau cé bat Khấu lợi định, động san va hao tai san tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_INTEREST_EXPENSE",
+      "std_label": "Interest expense",
+      "context": "asof_2024",
+      "amount": 575513102914.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "phi lai đó: Chi Trong vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_INTEREST_EXPENSE",
+      "std_label": "Interest expense",
+      "context": "asof_2025",
+      "amount": 516797919073.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "phi lai đó: Chi Trong vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_INTEREST_EXPENSE",
+      "std_label": "Interest expense",
+      "context": "q2_2024",
+      "amount": 273012420235.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "phi lai đó: Chi Trong vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_INTEREST_EXPENSE",
+      "std_label": "Interest expense",
+      "context": "q2_2025",
+      "amount": 272234788317.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "phi lai đó: Chi Trong vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_NET_CFF",
+      "std_label": "Net cash from financing activities",
+      "context": "asof_2024",
+      "amount": 213024393215.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "chuyén tién thuần tai chinh từ hoat động Luu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_NET_CFF",
+      "std_label": "Net cash from financing activities",
+      "context": "asof_2025",
+      "amount": 3025904654080.0,
+      "unit": "VND",
+      "page": 14,
+      "src_label": "chuyén tién thuần tai chinh từ hoat động Luu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_NET_CFO",
+      "std_label": "Net cash from operating activities",
+      "context": "asof_2024",
+      "amount": 1201327966352.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "dau thuần chuyển tién động từ hoat Lưu tw",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_PROVISION_EXP",
+      "std_label": "Provision expenses",
+      "context": "asof_2025",
+      "amount": 102863970880.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "du phòng Các khoản",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_ST_INVESTMENT",
+      "std_label": "Payments for investments",
+      "context": "asof_2025",
+      "amount": 201310080858.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "von Dau vi khác don gdp vào tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "CF_ST_INVESTMENT",
+      "std_label": "Payments for investments",
+      "context": "asof_2025_2",
+      "amount": 133427689404.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "von Dau vi khác don gdp vào tu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ACCOUNTING_PROFIT_B4_TAX",
+      "std_label": "Profit before tax",
+      "context": "asof_2024",
+      "amount": 1768126137262.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "thuế Lợinhuận trước I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ACCOUNTING_PROFIT_B4_TAX",
+      "std_label": "Profit before tax",
+      "context": "asof_2025",
+      "amount": 2198049305746.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "thuế Lợinhuận trước I",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "asof_2024",
+      "amount": 587526606488.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "phiéu chi phi phat hành trai Chiphí lai va vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "asof_2025",
+      "amount": 526290149878.0,
+      "unit": "VND",
+      "page": 13,
+      "src_label": "phiéu chi phi phat hành trai Chiphí lai va vay",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "col1",
+      "amount": 373227263768.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "trién nghệ khoa hoc va công phat Quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "col2",
+      "amount": 429524047323.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "trién nghệ khoa hoc va công phat Quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "q2_2024",
+      "amount": 392995771846.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nghiệp ly doanh Chi phi quan",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_ADMIN_EXP",
+      "std_label": "General and administrative expenses",
+      "context": "q2_2025",
+      "amount": 453032155578.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nghiệp ly doanh Chi phi quan",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_CIT_EXPENSE",
+      "std_label": "Corporate income tax expense",
+      "context": "col1",
+      "amount": 306515999438.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "loi phic khen thưởng, Quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_CIT_EXPENSE",
+      "std_label": "Corporate income tax expense",
+      "context": "col2",
+      "amount": 267612768863.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "loi phic khen thưởng, Quy",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_COGS",
+      "std_label": "Cost of goods sold",
+      "context": "asof_2024",
+      "amount": 546946617087.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "ban hang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_COGS",
+      "std_label": "Cost of goods sold",
+      "context": "asof_2025",
+      "amount": 639313575157.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "ban hang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_COGS",
+      "std_label": "Cost of goods sold",
+      "context": "q2_2024",
+      "amount": 6752458758134.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "vốn ban Giá hang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_COGS",
+      "std_label": "Cost of goods sold",
+      "context": "q2_2025",
+      "amount": 374405750025.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "ban hang",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_FINANCE_EXPENSE",
+      "std_label": "Finance costs",
+      "context": "asof_2024",
+      "amount": 912449758867.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "chính phí tai Chỉ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_FINANCE_EXPENSE",
+      "std_label": "Finance costs",
+      "context": "asof_2025",
+      "amount": 667984519188.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "chính phí tai Chỉ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_FINANCE_EXPENSE",
+      "std_label": "Finance costs",
+      "context": "q2_2024",
+      "amount": 494372298705.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "chính phí tai Chỉ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_FINANCE_EXPENSE",
+      "std_label": "Finance costs",
+      "context": "q2_2025",
+      "amount": 331739539302.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "chính phí tai Chỉ",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_EXPENSES",
+      "std_label": "Other expenses",
+      "context": "asof_2024",
+      "amount": 12125282442.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhuận/(lỗ) khác Loi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_EXPENSES",
+      "std_label": "Other expenses",
+      "context": "asof_2025",
+      "amount": 16059313777.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhuận/(lỗ) khác Loi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_EXPENSES",
+      "std_label": "Other expenses",
+      "context": "q2_2024",
+      "amount": 6910756892.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhuận/(lỗ) khác Loi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_EXPENSES",
+      "std_label": "Other expenses",
+      "context": "q2_2025",
+      "amount": 27771579550.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhuận/(lỗ) khác Loi",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "asof_2024",
+      "amount": 46825340871.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhập khác Thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "asof_2025",
+      "amount": 39127781012.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhập khác Thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "asof_2025_2",
+      "amount": 160892490195.0,
+      "unit": "VND",
+      "page": 10,
+      "src_label": "thué nhập hoãn lai Tài sản thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "col1",
+      "amount": 665321497370.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Thuế lai phai nhập hoãn tra thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "col2",
+      "amount": 630632267480.0,
+      "unit": "VND",
+      "page": 11,
+      "src_label": "Thuế lai phai nhập hoãn tra thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "q2_2024",
+      "amount": 19840596579.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhập khác Thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_OTHER_INCOME",
+      "std_label": "Other income",
+      "context": "q2_2025",
+      "amount": 35642945660.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "nhập khác Thu",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_PROFIT_AFTER_TAX",
+      "std_label": "Profit after tax",
+      "context": "asof_2024",
+      "amount": 1355984246200.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuế doanh nghiệp thu nhập nhuận Lợi sau",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_PROFIT_AFTER_TAX",
+      "std_label": "Profit after tax",
+      "context": "asof_2025",
+      "amount": 899103176605.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuế Cong của Lợi nhuận ty me sau",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_PROFIT_AFTER_TAX",
+      "std_label": "Profit after tax",
+      "context": "q2_2024",
+      "amount": 1102519866705.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuế doanh nghiệp thu nhập nhuận Lợi sau",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_PROFIT_AFTER_TAX",
+      "std_label": "Profit after tax",
+      "context": "q2_2025",
+      "amount": 665361303487.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuế Cong của Lợi nhuận ty me sau",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_REVENUE",
+      "std_label": "Revenue",
+      "context": "asof_2024",
+      "amount": 1756000854820.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuần động kinh doanh tir hoạt Loi nhuận",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_REVENUE",
+      "std_label": "Revenue",
+      "context": "asof_2025",
+      "amount": 2181989991969.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuần động kinh doanh tir hoạt Loi nhuận",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_REVENUE",
+      "std_label": "Revenue",
+      "context": "col2",
+      "amount": 100100512.0,
+      "unit": "VND",
+      "page": 7,
+      "src_label": "Gidy dong theo",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_REVENUE",
+      "std_label": "Revenue",
+      "context": "q2_2024",
+      "amount": 1085863764872.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "dong tai chinh Doanh thu hoạt",
+      "confidence": 0.8
+    },
+    {
+      "std_code": "IS_REVENUE",
+      "std_label": "Revenue",
+      "context": "q2_2025",
+      "amount": 1524760107152.0,
+      "unit": "VND",
+      "page": 12,
+      "src_label": "thuần động kinh doanh tir hoạt Loi nhuận",
+      "confidence": 0.8
+    }
+  ],
+  "notes": [
+    {
+      "note_group": "note_table",
+      "item_key": "Cé Công ty",
+      "item_label": "Cé Công ty",
+      "context_key": "h3",
+      "amount": 28500000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé Công ty",
+      "item_label": "Cé Công ty",
+      "context_key": "h4",
+      "amount": 1425000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé Công ty",
+      "item_label": "Cé Công ty",
+      "context_key": "h5",
+      "amount": 27075000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 5,
+        "note_no": null,
+        "col_label": "h5",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé phan Công ty",
+      "item_label": "Cé phan Công ty",
+      "context_key": "h3",
+      "amount": 11000000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé phan Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé phan Công ty",
+      "item_label": "Cé phan Công ty",
+      "context_key": "h5",
+      "amount": 11000000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 5,
+        "note_no": null,
+        "col_label": "h5",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé phan Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé ty",
+      "item_label": "Cé ty",
+      "context_key": "h3",
+      "amount": 1057011301.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé ty",
+      "item_label": "Cé ty",
+      "context_key": "h4",
+      "amount": 1057011301.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé ty",
+      "item_label": "Cé ty",
+      "context_key": "h7",
+      "amount": 1057011301.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 7,
+        "note_no": null,
+        "col_label": "h7",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cé ty",
+      "item_label": "Cé ty",
+      "context_key": "h8",
+      "amount": 1057011301.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 8,
+        "note_no": null,
+        "col_label": "h8",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cé ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Céng ty",
+      "item_label": "Céng ty",
+      "context_key": "h3",
+      "amount": 120734325759.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Céng ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Céng ty",
+      "item_label": "Céng ty",
+      "context_key": "h4",
+      "amount": 277207560000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Céng ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Céng ty",
+      "item_label": "Céng ty",
+      "context_key": "h7",
+      "amount": 120734325759.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 7,
+        "note_no": null,
+        "col_label": "h7",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Céng ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Céng ty",
+      "item_label": "Céng ty",
+      "context_key": "h8",
+      "amount": 241470000000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 8,
+        "note_no": null,
+        "col_label": "h8",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Céng ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cổ phần Công ty",
+      "item_label": "Cổ phần Công ty",
+      "context_key": "h3",
+      "amount": 28382391454.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cổ phần Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Cổ phần Công ty",
+      "item_label": "Cổ phần Công ty",
+      "context_key": "h5",
+      "amount": 28382391454.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 5,
+        "note_no": null,
+        "col_label": "h5",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Cổ phần Công ty",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Dau",
+      "item_label": "Dau",
+      "context_key": "h3",
+      "amount": 201310080858.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Dau",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Dau",
+      "item_label": "Dau",
+      "context_key": "h4",
+      "amount": 294423873863.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Dau",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Dau",
+      "item_label": "Dau",
+      "context_key": "h5",
+      "amount": 67670905236.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 5,
+        "note_no": null,
+        "col_label": "h5",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Dau",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Dau",
+      "item_label": "Dau",
+      "context_key": "h7",
+      "amount": 133427689404.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 7,
+        "note_no": null,
+        "col_label": "h7",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Dau",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Dau",
+      "item_label": "Dau",
+      "context_key": "h8",
+      "amount": 257717154263.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 8,
+        "note_no": null,
+        "col_label": "h8",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Dau",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Ngan hang",
+      "item_label": "Ngan hang",
+      "context_key": "h3",
+      "amount": 2178670000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Ngan hang",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Ngan hang",
+      "item_label": "Ngan hang",
+      "context_key": "h4",
+      "amount": 6490134000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Ngan hang",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Ngan hang",
+      "item_label": "Ngan hang",
+      "context_key": "h7",
+      "amount": 2178670000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 7,
+        "note_no": null,
+        "col_label": "h7",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Ngan hang",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "Ngan hang",
+      "item_label": "Ngan hang",
+      "context_key": "h8",
+      "amount": 6945974400.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 8,
+        "note_no": null,
+        "col_label": "h8",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "Ngan hang",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "phiéu Trai",
+      "item_label": "phiéu Trai",
+      "context_key": "h3",
+      "amount": 1752300000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 3,
+        "note_no": null,
+        "col_label": "h3",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "phiéu Trai",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "phiéu Trai",
+      "item_label": "phiéu Trai",
+      "context_key": "h4",
+      "amount": 1752300000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 4,
+        "note_no": null,
+        "col_label": "h4",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "phiéu Trai",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "phiéu Trai",
+      "item_label": "phiéu Trai",
+      "context_key": "h5",
+      "amount": 1752300000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 5,
+        "note_no": null,
+        "col_label": "h5",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "phiéu Trai",
+      "confidence": 0.86
+    },
+    {
+      "note_group": "note_table",
+      "item_key": "phiéu Trai",
+      "item_label": "phiéu Trai",
+      "context_key": "h7",
+      "amount": 1752300000.0,
+      "unit": "VND",
+      "dims": {
+        "col_idx": 7,
+        "note_no": null,
+        "col_label": "h7",
+        "table_idx": 4,
+        "note_title": null
+      },
+      "page": 37,
+      "src_label": "phiéu Trai",
+      "confidence": 0.86
+    }
+  ]
+}

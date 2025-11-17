@@ -1,0 +1,291 @@
+-- 0) Danh mục chung
+CREATE TABLE companies (
+  company_id SERIAL PRIMARY KEY,
+  ticker TEXT NOT NULL,
+  company_name TEXT NOT NULL,
+  industry TEXT,
+  UNIQUE(ticker)
+);
+
+CREATE TYPE report_type AS ENUM ('quarter', 'semi_annual', 'annual');
+CREATE TYPE consolidation AS ENUM ('consolidated','separate');
+CREATE TYPE gaap AS ENUM ('VAS','IFRS');
+CREATE TYPE audit_opinion AS ENUM ('audit_unqualified','audit_qualified','review','unaudited','other');
+
+CREATE TABLE reports (
+  report_id SERIAL PRIMARY KEY,
+  company_id INT REFERENCES companies(company_id),
+  period_start DATE NOT NULL,
+  period_end DATE NOT NULL,
+  fiscal_year INT GENERATED ALWAYS AS (EXTRACT(YEAR FROM period_end)) STORED,
+  report_type report_type NOT NULL,
+  consolidation consolidation NOT NULL,
+  gaap gaap NOT NULL,
+  currency TEXT NOT NULL DEFAULT 'VND',
+  auditor TEXT,
+  audit_opinion audit_opinion,
+  source_file TEXT,      -- đường dẫn file PDF
+  source_note TEXT,      -- link IR, số công văn…
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(company_id, period_start, period_end, consolidation, gaap)
+);
+
+-- 1) Taxonomy chỉ tiêu chuẩn hoá cho BS/IS/CF
+CREATE TYPE statement_type AS ENUM ('BS','IS','CF','Equity');
+CREATE TABLE line_items (
+  line_item_id SERIAL PRIMARY KEY,
+  statement statement_type NOT NULL,
+  std_code TEXT NOT NULL,           -- mã chuẩn hoá: e.g. BS_CASH, IS_REVENUE
+  std_label TEXT NOT NULL,          -- nhãn chuẩn hoá tiếng Anh/VN
+  native_examples TEXT[],           -- tên gọi thường gặp trong VAS (VD: "Tiền và tương đương tiền")
+  vas_code TEXT,                    -- nếu có mapping Mã chỉ tiêu (B01/B02)
+  sign INT NOT NULL DEFAULT 1,      -- +1/-1 chuẩn hướng dấu
+  UNIQUE(statement, std_code)
+);
+
+-- 2) Fact số liệu (mức "chỉ tiêu" trên từng báo cáo)
+CREATE TYPE value_context AS ENUM ('current_period','prior_period','beginning','yoy','ttm');
+CREATE TABLE facts (
+  fact_id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  line_item_id INT REFERENCES line_items(line_item_id),
+  context value_context NOT NULL,  -- ví dụ "current_period" (số cuối kỳ), "prior_period"
+  amount NUMERIC(20,2),
+  unit TEXT DEFAULT 'VND',
+  dims JSONB DEFAULT '{}'::jsonb,  -- mở rộng: {segment_id:..., currency:..., restated:true}
+  page INT,                         -- số trang trong PDF nơi tìm thấy
+  src_label TEXT,                   -- nhãn gốc đọc được
+  confidence REAL,                  -- độ tin cậy model
+  UNIQUE(report_id, line_item_id, context, dims)
+);
+CREATE INDEX facts_gin_dims ON facts USING GIN (dims);
+
+-- 3) Phân khúc (kinh doanh/địa lý)
+CREATE TYPE segment_type AS ENUM ('business','geography','customer');
+CREATE TABLE segments (
+  segment_id SERIAL PRIMARY KEY,
+  company_id INT REFERENCES companies(company_id),
+  seg_type segment_type NOT NULL,
+  seg_name TEXT NOT NULL,
+  UNIQUE(company_id, seg_type, seg_name)
+);
+CREATE TABLE segment_metrics (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  segment_id INT REFERENCES segments(segment_id),
+  metric TEXT NOT NULL,        -- 'revenue','gross_profit','assets', 'order_backlog', ...
+  amount NUMERIC(20,2),
+  unit TEXT DEFAULT 'VND',
+  page INT,
+  dims JSONB DEFAULT '{}'::jsonb,
+  UNIQUE(report_id, segment_id, metric, dims)
+);
+
+-- 4) Khoản vay & nợ thuê tài chính (theo thuyết minh GEX tr.39; CTD tr.48–50)
+CREATE TABLE lenders (
+  lender_id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+CREATE TYPE debt_type AS ENUM ('bank_loan','bond','lease','other');
+CREATE TABLE borrowings (
+  borrowing_id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  debt_type debt_type NOT NULL,
+  lender_id INT REFERENCES lenders(lender_id),
+  short_long TEXT CHECK (short_long IN ('short','long')),
+  currency TEXT DEFAULT 'VND',
+  principal NUMERIC(20,2),
+  interest_rate TEXT,           -- ví dụ "F+3.5%/năm"
+  maturity_date DATE,
+  collateral TEXT,
+  purpose TEXT,
+  page INT,
+  dims JSONB DEFAULT '{}'::jsonb
+);
+
+-- 5) Hàng tồn kho (breakdown & dự phòng)
+CREATE TABLE inventories (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  category TEXT,                 -- nguyên vật liệu, hàng hóa, BĐS dở dang, ...
+  gross_amount NUMERIC(20,2),
+  provision NUMERIC(20,2),
+  net_amount NUMERIC(20,2),
+  page INT
+);
+
+-- 6) Phải thu & tuổi nợ (bao gồm phải thu cho vay CTCK như HAC tr.10–11)
+CREATE TABLE receivables (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  receivable_type TEXT,          -- khách hàng, cho vay, ký quỹ, khác...
+  counterparty TEXT,             -- tên KH nếu có
+  short_long TEXT CHECK (short_long IN ('short','long')),
+  gross_amount NUMERIC(20,2),
+  allowance NUMERIC(20,2),
+  net_amount NUMERIC(20,2),
+  aging_bucket TEXT,             -- 0–30, 31–90, >90…
+  page INT,
+  dims JSONB DEFAULT '{}'::jsonb
+);
+
+-- 7) TSCĐ hữu hình/vô hình: roll-forward (GEX tr.27–30; CTD tr.40–45)
+CREATE TABLE ppe_rollforward (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  asset_class TEXT,              -- "Nhà cửa", "Máy móc", "Quyền sử dụng đất", "Phần mềm"...
+  opening_cost NUMERIC(20,2),
+  additions NUMERIC(20,2),
+  disposals NUMERIC(20,2),
+  transfers NUMERIC(20,2),
+  closing_cost NUMERIC(20,2),
+  opening_accdep NUMERIC(20,2),
+  depreciation NUMERIC(20,2),
+  disposals_accdep NUMERIC(20,2),
+  closing_accdep NUMERIC(20,2),
+  net_book_value NUMERIC(20,2),
+  page INT
+);
+
+-- 8) Đầu tư tài chính (cố phiếu/trái phiếu/CT con, liên kết)
+CREATE TYPE invest_class AS ENUM ('trading_securities','htm','afs','subsidiary','associate','joint_venture','other_equity','bond');
+CREATE TABLE investments (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  invest_class invest_class NOT NULL,
+  instrument TEXT,               -- tên CK/đơn vị nhận đầu tư
+  original_cost NUMERIC(20,2),
+  carrying_amount NUMERIC(20,2),
+  fair_value NUMERIC(20,2),
+  reserve NUMERIC(20,2),
+  ownership_pct NUMERIC(7,4),
+  page INT,
+  dims JSONB DEFAULT '{}'::jsonb
+);
+
+-- 9) Thuế TNDN (CTD tr.58–60)
+CREATE TABLE income_taxes (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  current_tax_expense NUMERIC(20,2),
+  deferred_tax_expense NUMERIC(20,2),
+  tax_payable NUMERIC(20,2),
+  deferred_tax_assets NUMERIC(20,2),
+  deferred_tax_liabilities NUMERIC(20,2),
+  effective_tax_rate NUMERIC(6,3),
+  page INT
+);
+
+-- 10) Biến động vốn CSH & EPS/cổ tức (CTD tr.52–54)
+CREATE TABLE equity_changes (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  component TEXT,                -- Vốn góp, thặng dư, quỹ, LNSTCPP...
+  opening NUMERIC(20,2),
+  increase NUMERIC(20,2),
+  decrease NUMERIC(20,2),
+  closing NUMERIC(20,2),
+  page INT
+);
+CREATE TABLE per_share_data (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  basic_eps NUMERIC(12,4),
+  diluted_eps NUMERIC(12,4),
+  shares_outstanding BIGINT,
+  dividends_per_share NUMERIC(12,4),
+  page INT
+);
+
+-- 11) Giao dịch bên liên quan (GEX tr.46–48; HAC tr.49–50)
+CREATE TABLE related_parties (
+  rp_id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  relationship TEXT
+);
+CREATE TABLE related_party_transactions (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  rp_id INT REFERENCES related_parties(rp_id),
+  nature TEXT,                   -- mua bán hàng hoá, vay/cho vay, bảo lãnh, thuê…
+  amount NUMERIC(20,2),
+  balance NUMERIC(20,2),
+  page INT,
+  dims JSONB DEFAULT '{}'::jsonb
+);
+
+-- 12) LCTT: dòng tiền chuẩn hoá (CFO/CFI/CFF + mục chi tiết)
+CREATE TYPE cashflow_section AS ENUM ('CFO','CFI','CFF');
+CREATE TABLE cashflows (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  section cashflow_section,
+  item TEXT,                     -- "Lợi nhuận trước thuế", "Khấu hao", "Chi mua TSCĐ", ...
+  amount NUMERIC(20,2),
+  page INT
+);
+
+-- 13) Staging thô cho pipeline trích xuất
+CREATE TABLE raw_extractions (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  page INT,
+  bbox JSONB,                    -- toạ độ vùng OCR {x0,y0,x1,y1}
+  key_text TEXT,
+  value_text TEXT,
+  normalized_amount NUMERIC(20,2),
+  unit TEXT,
+  model_name TEXT,
+  confidence REAL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 14) Chỉ số phân tích (tính sau khi nạp dữ liệu)
+CREATE TABLE analytics (
+  id BIGSERIAL PRIMARY KEY,
+  report_id INT REFERENCES reports(report_id) ON DELETE CASCADE,
+  metric TEXT,                   -- ROE, ROA, GrossMargin, NetDebt, EBITDA, InterestCoverage...
+  value NUMERIC(20,4),
+  note TEXT
+);
+CREATE INDEX analytics_idx ON analytics(report_id, metric);
+
+-- =========================================================
+-- Unified Notes table: lưu mọi thuyết minh ở dạng “facts”
+-- =========================================================
+CREATE TABLE IF NOT EXISTS notes_unified (
+  note_id      BIGSERIAL PRIMARY KEY,
+  report_id    BIGINT NOT NULL REFERENCES reports(report_id) ON DELETE CASCADE,
+
+  -- Nhóm thuyết minh (vd: borrowings, inventories, receivables, ppe_rollforward, investments, income_taxes, equity_changes, per_share_data, related_parties, cashflows, misc)
+  note_group   TEXT NOT NULL,
+
+  -- Khóa con của nhóm (vd: tên ngân hàng/trái phiếu, tên loại hàng tồn kho, lớp TSCĐ, tên khoản mục,…)
+  item_key     TEXT,            -- key “máy đọc”
+  item_label   TEXT,            -- label “nguyên văn”/dễ đọc
+
+  -- Bối cảnh/cột (vd: closing, opening, movement, q2_2025, ytd_2025, asof_2025, …)
+  context_key  TEXT,
+
+  -- Giá trị số + đơn vị
+  amount       NUMERIC,
+  unit         TEXT DEFAULT 'VND',
+
+  -- Thuộc tính linh hoạt: JSONB (vd: short_long, debt_type, counterparty, interest_rate, ownership_pct, aging_bucket, asset_class,…)
+  dims         JSONB,
+
+  -- Trace
+  page         INT,
+  src_label    TEXT,
+  confidence   REAL DEFAULT 0.80,
+
+  -- Fingerprint để idempotent upsert
+  fp           TEXT,
+
+  created_at   TIMESTAMPTZ DEFAULT now()
+);
+
+-- Tối ưu truy vấn
+CREATE INDEX IF NOT EXISTS idx_notes_unified_report ON notes_unified(report_id, note_group);
+CREATE INDEX IF NOT EXISTS idx_notes_unified_dims_gin ON notes_unified USING GIN (dims);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_notes_unified_fingerprint ON notes_unified(report_id, fp);
