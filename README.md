@@ -72,6 +72,7 @@ Nếu lần đầu chạy Windows SmartScreen cảnh báo, nhấn:
 More info → Run anyway
 
 📋 4. Hướng dẫn sử dụng
+
 1️⃣ Chọn file PDF báo cáo tài chính
 
 Ứng dụng hỗ trợ:
