@@ -11,6 +11,8 @@ import pytesseract
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import multiprocessing
 
 # --- ENV (Windows optional) ---
 TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -21,15 +23,16 @@ if os.path.exists(TESSERACT_PATH):
 NUM_ANY  = re.compile(r"\(?[-+]?\s*(?:\d{1,3}(?:[.\s]\d{3})+|\d+)(?:,\d+|\.\d+)?\)?$")
 NUMISH   = re.compile(r'^[\d\.\,\(\)\-\s]+$')
 DATE_RE  = re.compile(r'(\d{1,2}[/\-]\d{1,2}[/\-]\d{2,4})')
-
+CLEAN_NUM_CHARS_RE = re.compile(r"[^\d\-\+,\.]")
 # Bật / tắt log OCR raw lines (nếu nhiều log quá anh có thể đặt = False)
-DEBUG_OCR_LINES = True
+DEBUG_OCR_LINES = False
 
 
 # ---------- OCR basic ----------
-def _ocr_image(pdf_path: Path, pageno1: int, dpi=420) -> Image.Image:
+def _ocr_image(pdf_path: Path, pageno1: int, dpi=320) -> Image.Image:
     """
     Render 1 trang PDF -> ảnh RGB để dùng cho OCR.
+    DPI=320: đủ nét cho bảng số, nhẹ hơn nhiều so với 420.
     """
     with fitz.open(pdf_path) as doc:
         p = doc.load_page(pageno1 - 1)
@@ -94,6 +97,32 @@ def _ocr_words(img: Image.Image) -> pd.DataFrame:
 
     return df
 
+def _clean_numeric_str(raw: str) -> str:
+    if raw is None:
+        return ""
+    s = str(raw).strip()
+    if not s:
+        return ""
+    if s.startswith("(") and s.endswith(")"):
+        s = s[1:-1]
+    s = CLEAN_NUM_CHARS_RE.sub("", s)
+    return s
+
+# Re-use bộ fix label giống bên ocr_processor
+LABEL_FIX_PATTERNS = {
+    "tiền không kỳ hạn hàng gửi ngân": "Tiền gửi ngân hàng không kỳ hạn",
+    "chuyên tiền đang": "Tiền đang chuyển",
+    "tiền đương khoản các tương": "Các khoản tương đương tiền",
+}
+
+def _normalize_label_text(label: str) -> str:
+    if not label:
+        return label
+    low = re.sub(r"\s+", " ", label.lower()).strip().strip(":")
+    for bad, good in LABEL_FIX_PATTERNS.items():
+        if bad in low:
+            return good
+    return label.strip()
 
 def _group_lines(df: pd.DataFrame, y_tol=8) -> List[pd.DataFrame]:
     """
@@ -119,7 +148,7 @@ def _group_lines(df: pd.DataFrame, y_tol=8) -> List[pd.DataFrame]:
 def _merge_numeric_runs(texts, xs, gap_px=110):
     """
     Ghép các token số đứng cạnh nhau thành 1 số đầy đủ.
-    Bỏ lọc mạnh, chỉ loại token không phải NUMISH.
+    Bỏ ngoặc bao quanh, bỏ ký tự lạ – giữ 0-9 . , + -.
     """
     items = sorted([(x, t) for t, x in zip(texts, xs)], key=lambda z: z[0])
     out, buf, bx, prev_x = [], "", None, None
@@ -128,9 +157,11 @@ def _merge_numeric_runs(texts, xs, gap_px=110):
         nonlocal buf, bx
         if not buf:
             return
-        raw = re.sub(r'[^0-9\.\,\(\)\-\s]', '', buf)
-        if re.search(r'\d', raw):
-            out.append((bx, raw.strip()))
+        cleaned = _clean_numeric_str(buf)
+        if not cleaned or not re.search(r"\d", cleaned):
+            buf, bx = "", None
+            return
+        out.append((bx, cleaned.strip()))
         buf, bx = "", None
 
     for x, t in items:
@@ -157,6 +188,7 @@ def _merge_numeric_runs(texts, xs, gap_px=110):
 
     flush()
     return out
+
 
 
 def _debug_dump_ocr_lines(words: pd.DataFrame, pageno1: int):
@@ -333,19 +365,17 @@ def _normalize_context_from_header(txt: str) -> Tuple[str, str]:
     return ("col", txt or "")
 
 
-def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int]:
+def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 10) -> List[int]:
     """
     Gom cụm các toạ độ x của số liệu → suy ra vị trí cột.
 
-    Sửa:
-      - Dùng _max_big_numbers_per_line để ước lượng số cột tối thiểu (min_k),
-        tránh case k quá nhỏ (ví dụ: chọn 2 cột trong khi 1 dòng có 6–7 số).
-      - Vẫn lọc cột yếu: mỗi center phải có đủ số điểm (>=3) mới chấp nhận.
+    - Dùng _max_big_numbers_per_line để ước lượng số cột tối thiểu (min_k).
+    - Số dùng để detect cột: chuỗi có >=4 chữ số (bớt bỏ sót cột có số nhỏ).
+    - Không loại quá mạnh các center ít điểm để tránh mất cột hiếm.
     """
     if words_df.empty:
         return []
 
-    # gom toàn bộ số lớn theo line
     xs_points: List[int] = []
     for ln in _group_lines(words_df, y_tol=8):
         texts = ln["text"].tolist()
@@ -353,7 +383,7 @@ def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int
         merged = _merge_numeric_runs(texts, xs, gap_px=110)
         for x, raw in merged:
             digits = re.sub(r"[^\d]", "", str(raw))
-            if len(digits) >= 5:  # chỉ coi là số liệu tiền / số lượng lớn
+            if len(digits) >= 4:
                 xs_points.append(int(x))
 
     if not xs_points:
@@ -361,9 +391,7 @@ def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int
 
     X = np.array(xs_points).reshape(-1, 1)
 
-    # ước lượng số cột tối thiểu từ dòng "giàu" số nhất
     max_big = _max_big_numbers_per_line(words_df)
-    # ít nhất 2 cột, nhiều nhất max_k
     start_k = max(2, min(max_big, max_k))
     end_k   = min(max_k, len(X))
 
@@ -374,7 +402,7 @@ def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int
             if len(set(km.labels_)) < 2:
                 continue
             sc = silhouette_score(X, km.labels_)
-            # ưu tiên k lớn hơn nếu score không tệ hơn quá 0.02
+
             prefer = (best_centers is not None and k > len(best_centers) and sc >= best_score - 0.02)
             if sc > best_score or prefer:
                 best_score = sc
@@ -384,17 +412,10 @@ def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int
 
     centers_num = sorted(best_centers) if best_centers else []
 
-    # Lọc các center yếu: mỗi center phải có >=3 điểm số lớn
-    strong_centers: List[int] = []
-    for cx in centers_num:
-        cnt = sum(1 for x in xs_points if abs(x - cx) <= 40)
-        if cnt >= 3:
-            strong_centers.append(int(cx))
-
+    # KHÔNG loại mạnh các center "yếu" nữa, chỉ gộp với header
     centers_hdr = _header_column_centers(words_df)
 
-    # Gộp 2 nguồn (numeric + header)
-    all_c = sorted(strong_centers + centers_hdr)
+    all_c = sorted(centers_num + centers_hdr)
     merged: List[int] = []
     for x in all_c:
         if not merged or abs(x - merged[-1]) > 55:
@@ -405,6 +426,7 @@ def _cluster_numeric_columns(words_df: pd.DataFrame, max_k: int = 8) -> List[int
     if len(merged) < 2:
         return merged
     return merged[:max_k]
+
 
 def _infer_multi_columns(words_df: pd.DataFrame) -> List[Dict]:
     """
@@ -429,64 +451,57 @@ def _infer_multi_columns(words_df: pd.DataFrame) -> List[Dict]:
     return cols
 
 
-def _parse_line_with_multi_columns(line_df: pd.DataFrame, cols: List[Dict], tol=260):
+def _parse_line_with_multi_columns(line_df: pd.DataFrame, cols: List[Dict], tol=100):
     """
-    Từ 1 dòng OCR + danh sách cột (toạ độ x) → label + dict context_key -> raw_number.
-
-    Sửa:
-      - Vẫn dùng vùng bên phải để lấy số liệu (tránh số nằm trong STT, năm...).
-      - Label được ghép từ TẤT CẢ token không phải số trên dòng (trừ VND/VNĐ),
-        không giới hạn chỉ ở vùng bên trái → xử lý tốt case mô tả nằm bên phải
-        như "Giá trị gia tăng", "Thu nhập doanh nghiệp", ...
+    Parse 1 dòng notes OCR nhiều cột:
+      - Label = tất cả token text (không phải số), sắp xếp theo x để tránh đảo từ.
+      - Số liệu = các số sau khi merge, loại số quá bên trái vùng label.
     """
     if line_df.empty or not cols:
         return "", {}
 
     texts = line_df["text"].tolist()
     xs    = line_df["x"].tolist()
-    ws    = line_df["w"].tolist() if "w" in line_df.columns else [20] * len(xs)
+    ws    = line_df.get("w", pd.Series([20] * len(xs))).tolist()
 
     left_most_col = min(c["x"] for c in cols)
     median_w = int(np.median([w for w in ws if w and w > 0])) if ws else 24
     margin   = max(30, int(1.5 * median_w))
-
-    # Vùng label để LOẠI SỐ (số ở quá bên trái thường là STT, năm...)
     label_threshold_x = left_most_col - margin
 
-    # --- 1) Gom số liệu ---
-    merged = _merge_numeric_runs(texts, xs, gap_px=110)
+    # 1) Gom số & loại số ở vùng label
+    merged = _merge_numeric_runs(texts, xs, gap_px=62)
     nums: List[Tuple[int, str]] = []
     for x, raw in merged:
-        digits = re.sub(r"[^\d]", "", raw)
-        # Bỏ toàn bộ số nằm trong vùng label (thường là số mục, số năm)
         if x < label_threshold_x:
             continue
-        # Nhận tất cả số có >=3 chữ số (giữ EPS / số lượng nhỏ trong bảng)
+        digits = re.sub(r"[^\d]", "", raw or "")
         if len(digits) >= 3:
             nums.append((int(x), raw))
 
     if not nums:
         return "", {}
 
-    # --- 2) Ghép label từ tất cả token không phải số ---
-    label_tokens: List[str] = []
-    for t in texts:
+    # 2) Ghép label từ tất cả token text (không phải số), sắp theo x
+    label_tokens: List[Tuple[str, int]] = []
+    for t, x in zip(texts, xs):
         t_clean = (t or "").strip()
         if not t_clean:
             continue
-        tl = t_clean.lower()
-        if tl in {"vnd", "vnđ"}:
-            # bỏ đơn vị tiền ở cuối dòng
-            continue
         if NUMISH.match(t_clean):
-            # giống số → không đưa vào label
             continue
-        label_tokens.append(t_clean)
+        # bỏ 'VND', 'VNĐ' đứng ở cuối
+        if t_clean.lower() in {"vnd", "vnđ"}:
+            continue
+        label_tokens.append((t_clean, x))
 
-    label = " ".join(label_tokens).strip()
+    label_tokens_sorted = sorted(label_tokens, key=lambda z: z[1])
+    label = " ".join(t for t, _x in label_tokens_sorted).strip()
+    label = _normalize_label_text(label)
 
+    # 3) Gán số vào từng cột (giống bên ocr_processor)
     cols_sorted = sorted([(c["x"], c["context_key"]) for c in cols], key=lambda z: z[0])
-    nums_sorted = sorted([(x, s) for x, s in nums], key=lambda z: z[0])
+    nums_sorted = sorted(nums, key=lambda z: z[0])
 
     def assign_once(limit: int):
         assigned, used_num = {}, set()
@@ -508,8 +523,6 @@ def _parse_line_with_multi_columns(line_df: pd.DataFrame, cols: List[Dict], tol=
         assigned = assign_once(int(2.2 * tol))
 
     values: Dict[str, str] = {}
-
-    # fallback: nếu không match toạ độ nhưng số lượng gần bằng số cột ⇒ gán tuần tự
     if len(assigned) == 0 and 1 <= len(nums_sorted) <= len(cols_sorted) + 1:
         for (cx, ck), (_nx, sv) in zip(cols_sorted, nums_sorted):
             values[ck] = sv
@@ -520,6 +533,7 @@ def _parse_line_with_multi_columns(line_df: pd.DataFrame, cols: List[Dict], tol=
                 values[ck] = nums_sorted[ni][1]
 
     return label, values
+
 
 
 def _page_is_tabular(words: pd.DataFrame) -> bool:
@@ -586,17 +600,31 @@ def _extract_ocr_table(pdf_path: Path, pageno1: int) -> Optional[pd.DataFrame]:
     lines = _group_lines(work, y_tol=8)
 
     recs: List[dict] = []
-    last_label = ""
+    pending_label = ""
+
     for ln in lines:
         label, vals = _parse_line_with_multi_columns(ln, cols)
-        if not label:
-            label = last_label
+        label = _normalize_label_text(label)
+
+        # Dòng không có số → tích luỹ label (dòng tiếp theo có số sẽ ghép vào)
         if not vals:
-            # dòng không có số → có thể là heading, bỏ qua ở đây
+            if label and not any(ch.isdigit() for ch in label):
+                if pending_label:
+                    pending_label = f"{pending_label} {label}"
+                else:
+                    pending_label = label
             continue
+
+        # Dòng có số → ghép label tích luỹ
+        if pending_label:
+            if label:
+                label = f"{pending_label} {label}"
+            else:
+                label = pending_label
+            pending_label = ""
+
         if not label:
             label = "(no_label)"
-        last_label = label
 
         row: Dict[str, Optional[str]] = {header_names[0]: label}
         for j, c in enumerate(cols, 1):
@@ -614,24 +642,59 @@ def _extract_ocr_table(pdf_path: Path, pageno1: int) -> Optional[pd.DataFrame]:
     df = df.drop_duplicates()
     return df
 
+def _process_one_page_tables(pdf_path: Path, p: int) -> List[Tuple[pd.DataFrame, int, str]]:
+    """
+    Xử lý toàn bộ bảng trên 1 trang:
+      - pdfplumber (vector)
+      - camelot (stream)
+      - OCR multi-column (cho bảng scan)
+    Trả về list (df, page, mode)
+    """
+    page_out: List[Tuple[pd.DataFrame, int, str]] = []
+
+    # pdfplumber vector
+    for df in _extract_plumber_tables(pdf_path, p):
+        page_out.append((df, p, "vector"))
+
+    # camelot stream
+    for df in _extract_camelot_tables(pdf_path, p):
+        page_out.append((df, p, "camelot"))
+
+    # OCR multi-column
+    mdf = _extract_ocr_table(pdf_path, p)
+    if mdf is not None and not mdf.empty:
+        page_out.append((mdf, p, "ocr"))
+
+    return page_out
 
 def harvest_tables(pdf_path: Path, a: int, b: int) -> List[Tuple[pd.DataFrame, int, str]]:
     """
     Quét [a,b] → [(df, page, mode)] với mode ∈ {"vector","camelot","ocr"}.
-    - Luôn cố gắng lấy *hết* bảng (kể cả bảng không khung).
-    - OCR luôn chạy bổ sung, không phụ thuộc đã có vector hay chưa.
-    - Các trang thuyết minh text thuần túy sẽ bị _extract_ocr_table bỏ qua.
+
+    Tối ưu:
+      - Mỗi trang được xử lý độc lập trong thread riêng → tận dụng đa core.
+      - Mỗi thread vẫn làm đủ 3 bước (plumber / camelot / OCR), không bỏ dữ liệu.
     """
     out: List[Tuple[pd.DataFrame, int, str]] = []
-    for p in range(a, b + 1):
-        # pdfplumber vector
-        for df in _extract_plumber_tables(pdf_path, p):
-            out.append((df, p, "vector"))
-        # camelot stream
-        for df in _extract_camelot_tables(pdf_path, p):
-            out.append((df, p, "camelot"))
-        # OCR multi-column
-        mdf = _extract_ocr_table(pdf_path, p)
-        if mdf is not None and not mdf.empty:
-            out.append((mdf, p, "ocr"))
+    if a > b:
+        return out
+
+    pages = list(range(a, b + 1))
+    # Số worker hợp lý: min(số trang, số CPU logic - 1)
+    max_workers = min(len(pages), max(1, multiprocessing.cpu_count() - 1))
+    print(f"🧵 harvest_tables: pages={pages}, max_workers={max_workers}")
+
+    with ThreadPoolExecutor(max_workers=max_workers) as ex:
+        futures = {ex.submit(_process_one_page_tables, pdf_path, p): p for p in pages}
+        for f in as_completed(futures):
+            p = futures[f]
+            try:
+                res = f.result()
+                if res:
+                    out.extend(res)
+            except Exception as e:
+                print(f"⚠️ Lỗi khi xử lý page {p} trong harvest_tables: {e}")
+
+    # Giữ nguyên thứ tự sort theo page (và không quan trọng mode)
+    out.sort(key=lambda t: t[1])
     return out

@@ -98,10 +98,8 @@ def insert_fact_rows(session, report_id: int, df: pd.DataFrame, candidates):
 
 def harvest_all_tables(pdf_path: Path, ocr_engine: str = "tesseract") -> pd.DataFrame:
     print("🔎 Tự động nhận diện vùng trang chứa bảng (BS/IS/CF)...")
-    page_ranges = locate_statement_pages(pdf_path, max_pages_to_scan=20)
-    pages = sorted({p for (s, e) in page_ranges.values() for p in range(s, e + 1)})
-    print(f"📚 Trang sẽ quét: {pages}")
-    result = extract_tables_ocr(pdf_path, pages=pages, ocr_engine=ocr_engine)
+    # Để pages=None, extract_tables_ocr sẽ tự locate_statement_pages 1 lần.
+    result = extract_tables_ocr(pdf_path, pages=None, ocr_engine=ocr_engine)
     if isinstance(result, tuple):
         df, _ = result
     else:

@@ -1,10 +1,22 @@
 from sqlalchemy import text, inspect
 from .db import engine
 from pathlib import Path
+import sys
+def _resource_path(rel: str) -> Path:
+    """
+    Trả về Path tới file resource (vd: csdl/csdl.txt)
+    - Khi chạy exe (PyInstaller): file nằm trong thư mục tạm sys._MEIPASS
+    - Khi dev: file nằm trong project (parents[1] của etl)
+    """
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base = Path(sys._MEIPASS)
+    else:
+        base = Path(__file__).resolve().parents[1]
+    return base / rel
 
 def apply_schema():
-    ddl = Path(__file__).resolve().parents[1] / "csdl" / "csdl.txt"
-    sql = ddl.read_text(encoding="utf-8")
+    ddl_path = _resource_path("csdl/csdl.txt")
+    sql = ddl_path.read_text(encoding="utf-8")
     
     inspector = inspect(engine)
     existing_tables = inspector.get_table_names()

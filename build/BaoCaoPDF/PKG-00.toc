@@ -1,0 +1,78 @@
+('C:\\Nguyen Nhat Vu\\test4\\build\\BaoCaoPDF\\BaoCaoPDF.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Nguyen Nhat Vu\\test4\\build\\BaoCaoPDF\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Nguyen Nhat Vu\\test4\\build\\BaoCaoPDF\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\build\\BaoCaoPDF\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\build\\BaoCaoPDF\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\build\\BaoCaoPDF\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\build\\BaoCaoPDF\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_pyside6',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyside6.py',
+   'PYSOURCE'),
+  ('pyi_rth_mplconfig',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_mplconfig.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgres',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
+   'PYSOURCE'),
+  ('pyi_rth_cryptography_openssl',
+   'C:\\Nguyen Nhat '
+   'Vu\\test4\\.venv39_paddle\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'PYSOURCE'),
+  ('desktop_main', 'C:\\Nguyen Nhat Vu\\test4\\desktop_main.py', 'PYSOURCE')],
+ 'python39.dll',
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)
